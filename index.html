@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Fomulário de cadastro</h1>
+       <div class="lista">
+           <ul>
+               <li>Nenhum campo pode estar vazio</li>
+               <li>Usuário só poderá conter letras e/ou numeros</li>
+               <li>Usuário deve ter entre 3 e 12 caracteres</li>
+               <li>Senha precisa ter entre 6 e 12 caracteres</li>
+           </ul>
+       </div> 
+        
+        <form action="/" method="POST" class = "formulario">
+            
+            <div class="input-wrapper">
+                <label>Nome</label>
+                <input type="text" id="name" class ="isValid">
+            </div>
+            <div class="input-wrapper">
+                <label>Sobrenome</label>
+                <input type="text" id="surName" class ="isValid">
+            </div>
+            <div class="input-wrapper">
+                <label>CPF</label>
+                <input type="text" class ="isValid CPF">
+            </div>
+            <div class="input-wrapper">
+                <label>Usuario</label>
+                <input type="text" id="usuario" class ="isValid">
+            </div>
+            <div class="input-wrapper">
+                <label>Senha</label>
+                <input type="password" id="password" class ="isValid">
+            </div>
+            <div class="input-wrapper">
+                <label>Confirme a senha</label>
+                <input type="password" id="repeatpassword" class ="isValid">
+            </div>
+        
+            <button type="submit" class="button">Enviar</button>
+        </form>
+
+    </div>
+    <script src="./ValidateCPF.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
