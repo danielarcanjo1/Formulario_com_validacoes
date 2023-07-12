@@ -22,12 +22,12 @@ class ValidForm{
         for(let errorMessage of this.form.querySelectorAll('.errorMessage')){
             errorMessage.remove();
         }
-        
+
         for(let field of this.form.querySelectorAll('.isValid')){
             
             const label = field.previousElementSibling.innerHTML;
             
-            if(!field.value && !field.classList.contains('CPF')){
+            if(!field.value && !field.classList.contains('CPF') && !field.classList.contains('user')){
                 this.errorMessage(field,`campo ${label} em branco`); 
                 check = false;
             }
@@ -36,6 +36,11 @@ class ValidForm{
                 if(!this.cpfIsValid(field.value)){
                     this.errorMessage(field,'CPF invalido')
                     check = false;
+                }
+            }
+            if(field.classList.contains('user')){
+                if(!this.userIsValid(field.value)){
+                    this.errorMessage(field,'Uuario deve conter apenas letras e numeros')
                 }
             }
         }
@@ -48,9 +53,14 @@ class ValidForm{
         field.insertAdjacentElement('afterend', div);
     }
 
-    cpfIsValid(novocpf){
-        const check = new ValidateCPF(novocpf)
+    cpfIsValid(newcpf){
+        const check = new ValidateCPF(newcpf)
         return check.validate()
     }  
+
+    userIsValid(newUser){
+        const check = new ValidateUser(newUser)
+        return check.validate()
+    }
 }
 const form = new ValidForm();

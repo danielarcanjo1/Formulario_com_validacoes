@@ -1,39 +1,65 @@
 class ValidateCPF{
-    constructor(cpf){
-        Object.defineProperty(this,'clearCpf',{
-            value: cpf.replace(/\D+/g,'')
-        }) 
-       this.validate()
-        
+    constructor(CPF){
+        this.CPF = this.normalizeCPF(CPF);
+        this.validate();   
+    }
+
+    normalizeCPF(CPF){
+        return CPF.replace(/\D+/g, '')
     }
 
     validate(){
-        let sumTemDigit=0;
-        let sumElevenDigit=0;
+        let sumDigit1=0;
+        let sumDigit2=0;
         let restDivision1;
         let restDivision2;
         let countEqual = 0;
  
-        if(String(this.clearCpf).length != 11) return false;
+        if(String(this.CPF).length != 11) {
+            return false;
+        }
 
-        if(this.clearCpf === ' ') return false;
+        if(this.CPF === ' '){ 
+            return false;
+        }
 
-        for(let i =0; i<=10; i++) if(this.clearCpf[0] === this.clearCpf[i]) countEqual++ ;   
-        if(countEqual === 11) return false;
+        for(let i=0; i<=10; i++){
+            if(this.CPF[0] === this.CPF[i]){
+                countEqual++ ;   
+            }
+        }
 
-        for(let i=0; i<9; i++) sumTemDigit+= this.clearCpf[i] * (10 - i);
-        restDivision1 = (sumTemDigit*10)%11;
+        if(countEqual === 11){
+            return false;
+        }    
+
+        for(let i=0; i<9; i++){
+            sumDigit1+= this.CPF[i] * (10 - i);
+        }
         
-        if(restDivision1 === 10 || restDivision1 === 11) restDivision1 = 0;
-        if(restDivision1 != this.clearCpf[9]) return false;
+        restDivision1 = (sumDigit1*10)%11;
         
+        if(restDivision1 === 10 || restDivision1 === 11){
+            restDivision1 = 0;
+        }
         
-        for(let i=0; i<10; i++) sumElevenDigit += this.clearCpf[i] * (11 - i);
-        restDivision2 = (sumElevenDigit*10)%11;
+        if(restDivision1 != this.CPF[9]){ 
+            return false;
+        }
         
-        if(restDivision2 === 10 || restDivision2 === 11) restDivision2 = 0;
-        if(restDivision2 != this.clearCpf[10]) return false;
+        for(let i=0; i<10; i++){
+             sumDigit2 += this.CPF[i] * (11 - i);
+        }
         
+        restDivision2 = (sumDigit2*10)%11;
+        
+        if(restDivision2 === 10 || restDivision2 === 11){
+             restDivision2 = 0;
+        }
+    
+        if(restDivision2 != this.CPF[10]){
+            return false;
+        }
         return true;
     }
 
